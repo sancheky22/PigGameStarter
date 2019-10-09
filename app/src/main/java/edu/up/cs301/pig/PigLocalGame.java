@@ -3,9 +3,6 @@ package edu.up.cs301.pig;
 import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.LocalGame;
 import edu.up.cs301.game.actionMsg.GameAction;
-import edu.up.cs301.game.infoMsg.GameState;
-
-import android.util.Log;
 
 /**
  * class PigLocalGame controls the play of the game
@@ -15,11 +12,14 @@ import android.util.Log;
  */
 public class PigLocalGame extends LocalGame {
 
+    private PigGameState PGS;
+
     /**
      * This ctor creates a new game state
      */
-    public PigLocalGame() {
+    public PigLocalGame(PigGameState state) {
         //TODO  You will implement this constructor
+       this.PGS = state;
     }
 
     /**
@@ -28,7 +28,14 @@ public class PigLocalGame extends LocalGame {
     @Override
     protected boolean canMove(int playerIdx) {
         //TODO  You will implement this method
-        return false;
+
+        if(playerIdx == PGS.getPlayerID()){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 
     /**
@@ -39,6 +46,21 @@ public class PigLocalGame extends LocalGame {
     @Override
     protected boolean makeMove(GameAction action) {
         //TODO  You will implement this method
+
+
+     int tempTotal = PGS.getCurrentRun()+playerScore;
+     int playerScore = PGS.getPlayerScore(PGS.getPlayerID());
+        if(action instanceof PigHoldAction && action.getPlayer().equals(players[PGS.getPlayerID()])){
+            PGS.setPlayerScore()
+           return true;
+        }else if(action instanceof PigRollAction && action.getPlayer().equals(players[PGS.getPlayerID()])){
+
+            return true;
+        }
+
+
+
+
         return false;
     }//makeMove
 
